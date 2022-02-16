@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.gaanaworld.ui.RegisterUserFragment"
+        android:label="fragment_register_user"
+        tools:layout="@layout/fragment_register_user" >
+        <action
+            android:id="@+id/action_registerUserFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerUserFragment_to_chooseSingersFragment"
+            app:destination="@id/chooseSingersFragment" />
+        <action
+            android:id="@+id/action_registerUserFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.gaanaworld.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_chooseSingersFragment"
+            app:destination="@id/chooseSingersFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseSingersFragment"
+        android:name="com.example.gaanaworld.ui.ChooseSingersFragment"
+        android:label="fragment_choose_singers"
+        tools:layout="@layout/fragment_choose_singers" />
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.example.gaanaworld.ui.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
+</navigation>
