@@ -36,7 +36,11 @@
         android:id="@+id/chooseSingersFragment"
         android:name="com.example.gaanaworld.ui.ChooseSingersFragment"
         android:label="fragment_choose_singers"
-        tools:layout="@layout/fragment_choose_singers" />
+        tools:layout="@layout/fragment_choose_singers" >
+        <action
+            android:id="@+id/action_chooseSingersFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
     <activity
         android:id="@+id/homeActivity"
         android:name="com.example.gaanaworld.ui.HomeActivity"

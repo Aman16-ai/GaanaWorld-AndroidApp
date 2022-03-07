@@ -1,23 +1,24 @@
 package com.example.gaanaworld.data.daos
 
 import com.example.gaanaworld.data.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class UserDao {
     private var db = FirebaseFirestore.getInstance()
-
-    suspend fun getUserDetails(UserUid:String):Boolean {
-        return try {
-            val result = db.collection("user")
-                .whereEqualTo("ui",UserUid)
-                .get().await()
-            result != null
-        } catch(e:Exception) {
-            e.printStackTrace()
-            false
+    private var mAuth = FirebaseAuth.getInstance()
+    suspend fun  getUserDetails() : String {
+        val result = db.collection("user").get().await()
+        for ( i in result) {
+            if(i.get("uid") == mAuth.currentUser?.uid) {
+                return i.id
+            }
         }
+        return "nouser"
     }
     suspend fun saveUserDetails(user: User):Boolean {
         return try {
@@ -26,6 +27,21 @@ class UserDao {
             result != null
         }
         catch(e:Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    suspend fun saveUserSingers(singers:MutableList<QueryDocumentSnapshot>): Boolean {
+        return try {
+            val userid = getUserDetails()
+            if(userid != "nouser") {
+                db.collection("user").document(userid).update("singers",singers).await()
+                true
+            } else {
+                false
+            }
+        }catch(e : Exception) {
             e.printStackTrace()
             false
         }
