@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
 
         loginUserViewModel.getAuthStatus().observe(viewLifecycleOwner){
             if(it) {
-                val action = LoginFragmentDirections.actionLoginFragmentToChooseSingersFragment()
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeActivity()
                 findNavController().navigate(action)
             }
         }

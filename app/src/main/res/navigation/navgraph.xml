@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerUserFragment"
             app:destination="@id/registerUserFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
     <fragment
         android:id="@+id/chooseSingersFragment"
