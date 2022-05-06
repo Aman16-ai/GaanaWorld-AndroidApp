@@ -1,5 +1,6 @@
 package com.example.gaanaworld.ui
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,17 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gaanaworld.R
 import com.example.gaanaworld.viewmodels.LoginUserViewModel
+import com.google.android.exoplayer2.Timeline
 
 
 class LoginFragment : Fragment() {
     private lateinit var emailEt : EditText
     private lateinit var passwordEt : EditText
     private lateinit var registertv : TextView
+    private lateinit var progressBar : ProgressBar
     private lateinit var btn : Button
 
     private val loginUserViewModel : LoginUserViewModel by viewModels()
@@ -37,14 +42,22 @@ class LoginFragment : Fragment() {
         passwordEt = view.findViewById(R.id.pass_et)
         registertv = view.findViewById(R.id.registerViewTv)
         btn = view.findViewById(R.id.loginBtn)
+        progressBar = view.findViewById(R.id.login_progress_bar)
+
+//        progressBar.visibility = View.GONE
 
         loginUserViewModel.getAuthStatus().observe(viewLifecycleOwner){
             if(it) {
+                progressBar.visibility = View.GONE
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeActivity()
                 findNavController().navigate(action)
             }
+            else {
+                progressBar.visibility = View.GONE
+            }
         }
         btn.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             loginUserViewModel.loginUser(email = emailEt.text.toString(), password = passwordEt.text.toString())
         }
         registertv.setOnClickListener {

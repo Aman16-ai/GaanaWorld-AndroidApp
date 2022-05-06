@@ -13,7 +13,7 @@ import com.google.android.exoplayer2.util.Util
 
 class ExoPlayerMusic(val context:Context) {
 
-    private val exoPlayer = SimpleExoPlayer.Builder(context).build()
+    private val exoPlayer = ExoPlayer.Builder(context).build()
 
     public fun playMusic(url:String) {
         val mediaSource = extractMediaSourceFromUri(url)
