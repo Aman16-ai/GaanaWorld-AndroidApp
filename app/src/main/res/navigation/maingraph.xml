@@ -3,20 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/maingraph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home_item">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/home_item"
         android:name="com.example.gaanaworld.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_home_item_to_musicScreenFragment"
+            app:destination="@id/musicScreenFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.gaanaworld.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/profile_item"
+        android:name="com.example.gaanaworld.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/musicScreenFragment"
+        android:name="com.example.gaanaworld.ui.MusicScreenFragment"
+        android:label="fragment_music_screen"
+        tools:layout="@layout/fragment_music_screen" >
+        <argument
+            android:name="songsArray"
+            app:argType="com.example.gaanaworld.data.model.Song[]" />
+        <argument
+            android:name="currentPosition"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
