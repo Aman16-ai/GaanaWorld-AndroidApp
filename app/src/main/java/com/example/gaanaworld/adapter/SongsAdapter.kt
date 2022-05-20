@@ -11,10 +11,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gaanaworld.R
 import com.example.gaanaworld.data.model.Song
+import com.example.gaanaworld.ui.HomeFragmentDirections
 import com.example.gaanaworld.utils.toast
 import com.example.gaanaworld.viewmodels.SongsViewModel
 import com.google.firebase.firestore.QueryDocumentSnapshot
@@ -39,7 +41,9 @@ class SongsAdapter(var context: Context , var songsViewModel: SongsViewModel) : 
         holder.songNameTv.text = songslst[position].Name
         holder.playBtn.setOnClickListener {
             context.toast("click on playbtn")
-            songslst[position].url?.let { it1 -> songsViewModel.playSong(it1) }
+//            songslst[position].url?.let { it1 -> songsViewModel.playSong(it1) }
+            val action = HomeFragmentDirections.actionHomeItemToMusicScreenFragment(songslst.toTypedArray(),position)
+            it.findNavController().navigate(action)
         }
     }
 

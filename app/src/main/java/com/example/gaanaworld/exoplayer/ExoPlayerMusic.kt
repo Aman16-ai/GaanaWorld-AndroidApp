@@ -26,8 +26,20 @@ class ExoPlayerMusic(val context:Context) {
             prepare(mediaSource)
             playWhenReady = true
         }
+
     }
 
+    public fun playPauseMusic() {
+        if(exoPlayer.isPlaying) {
+            exoPlayer.pause()
+        }
+        else {
+            exoPlayer.play()
+        }
+    }
+    public fun getMusicDurationPosition() :Long {
+        return exoPlayer.duration
+    }
     private fun extractMediaSourceFromUri(uri:String):MediaSource {
         val userAgent = Util.getUserAgent(context,"Exo");
         return ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory())

@@ -15,16 +15,24 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
     private var exoPlayerMusic = ExoPlayerMusic(application.applicationContext)
     private val songDao = SongDao()
     private var songslst : MutableLiveData<MutableList<Song>> = MutableLiveData()
+    private var songCurrentDuration : MutableLiveData<Long> = MutableLiveData()
 
     fun playSong(url:String) {
-//        mediaPlayerService.playSound(url)
         exoPlayerMusic.playMusic(url)
     }
 
+    fun playPauseSong() {
+        exoPlayerMusic.playPauseMusic()
+    }
 
     fun getSongs() : MutableLiveData<MutableList<Song>> {
         fetchSongs()
         return songslst
+    }
+
+    fun getCurrentSongDuration() : MutableLiveData<Long> {
+        songCurrentDuration.value = exoPlayerMusic.getMusicDurationPosition()
+        return songCurrentDuration
     }
     fun fetchSongs() {
         viewModelScope.launch {
