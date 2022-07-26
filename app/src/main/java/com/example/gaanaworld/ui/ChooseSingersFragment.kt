@@ -12,12 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gaanaworld.R
-import com.example.gaanaworld.adapter.SingersAdapter
-import com.example.gaanaworld.data.model.Singers
+import com.example.gaanaworld.ui.adapter.SingersAdapter
 import com.example.gaanaworld.utils.toast
-import com.example.gaanaworld.viewmodels.ChooseSingersViewModel
+import com.example.gaanaworld.ui.viewmodels.ChooseSingersViewModel
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import java.util.*
 
 
 class ChooseSingersFragment : Fragment() {
@@ -42,7 +40,7 @@ class ChooseSingersFragment : Fragment() {
         skipbtn = view.findViewById(R.id.skipe_btn)
         recyclerView = view.findViewById(R.id.signers_recyclerview)
 
-        chooseSingersViewModel.getNavStatus().observe(viewLifecycleOwner) {
+        chooseSingersViewModel.navStatus.observe(viewLifecycleOwner) {
             if(it) {
                 val action = ChooseSingersFragmentDirections.actionChooseSingersFragmentToHomeActivity()
                 findNavController().navigate(action)

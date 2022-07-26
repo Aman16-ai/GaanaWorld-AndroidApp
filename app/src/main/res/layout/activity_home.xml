@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeActivity">
+    tools:context=".ui.HomeActivity"
+    android:background="#000814"
+    >
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_home_fragment"
@@ -27,8 +29,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:itemIconSize="38dp"
         app:menu="@menu/bottom_navbar_menu"
-        android:background="#a8dadc"
-        app:itemIconTint="#1d3557"
-        app:itemTextColor="#1d3557"
+        android:background="#000814"
+        app:itemIconTint="#ffc300"
+        app:itemTextColor="#ffc300"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

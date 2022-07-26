@@ -26,7 +26,11 @@
         android:id="@+id/profile_item"
         android:name="com.example.gaanaworld.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_item_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
     <fragment
         android:id="@+id/musicScreenFragment"
         android:name="com.example.gaanaworld.ui.MusicScreenFragment"
@@ -40,4 +44,9 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <fragment
+        android:id="@+id/add_music_item"
+        android:name="com.example.gaanaworld.ui.UploadSongFragment"
+        android:label="fragment_upload_song"
+        tools:layout="@layout/fragment_upload_song" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.gaanaworld.adapter
+package com.example.gaanaworld.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gaanaworld.R
-import com.example.gaanaworld.data.model.Singers
 import com.example.gaanaworld.utils.toast
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class SingersAdapter(var context: Context) : RecyclerView.Adapter<SingersAdapter.myViewHolder>() {

@@ -11,19 +11,15 @@ import kotlinx.coroutines.tasks.await
 class UserDao {
     private var db = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance()
-    suspend fun  getUserDetails() : String {
-        val result = db.collection("user").get().await()
-        for ( i in result) {
-            if(i.get("uid") == mAuth.currentUser?.uid) {
-                return i.id
-            }
-        }
-        return "nouser"
+    suspend fun  getUserDetails() {
+        val result = mAuth.uid?.let { db.collection("user").document(it).get().await() }
     }
     suspend fun saveUserDetails(user: User):Boolean {
         return try {
-            var result = db.collection("user")
-                .add(user).await()
+            var result = mAuth.uid?.let {
+                db.collection("user")
+                    .document(it).set(user).await()
+            }
             result != null
         }
         catch(e:Exception) {
@@ -34,13 +30,9 @@ class UserDao {
 
     suspend fun saveUserSingers(singers:MutableList<QueryDocumentSnapshot>): Boolean {
         return try {
-            val userid = getUserDetails()
-            if(userid != "nouser") {
-                db.collection("user").document(userid).update("singers",singers).await()
-                true
-            } else {
-                false
-            }
+            val result = mAuth.uid?.let { db.collection("user").document(it).update("singers",singers).await() }
+            return true
+
         }catch(e : Exception) {
             e.printStackTrace()
             false

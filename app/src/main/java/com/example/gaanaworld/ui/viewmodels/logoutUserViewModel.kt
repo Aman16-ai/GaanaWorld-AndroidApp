@@ -1,9 +1,9 @@
-package com.example.gaanaworld.viewmodels
+package com.example.gaanaworld.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.gaanaworld.repository.UserAuthenticationRepository
+import com.example.gaanaworld.data.repository.UserAuthenticationRepository
 
 class logoutUserViewModel(application: Application) : AndroidViewModel(application) {
     private val authenticationRepository = UserAuthenticationRepository()

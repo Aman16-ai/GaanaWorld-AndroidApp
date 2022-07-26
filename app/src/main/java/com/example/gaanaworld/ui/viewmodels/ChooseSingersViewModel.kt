@@ -1,4 +1,4 @@
-package com.example.gaanaworld.viewmodels
+package com.example.gaanaworld.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,6 @@ import com.example.gaanaworld.data.daos.SingerDao
 import com.example.gaanaworld.data.daos.UserDao
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firestore.admin.v1.Index
 import kotlinx.coroutines.launch
 
 class ChooseSingersViewModel(application: Application) : AndroidViewModel(application) {
@@ -17,19 +16,21 @@ class ChooseSingersViewModel(application: Application) : AndroidViewModel(applic
     private var singersListLiveData : MutableLiveData<QuerySnapshot> = MutableLiveData()
     private var singerDao = SingerDao()
     private var userDao = UserDao()
-    private var navStatus : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    private var _navStatus : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+
+    val navStatus : LiveData<Boolean>
+    get()= _navStatus
+
     init {
-        navStatus.value = false
-    }
-    fun getNavStatus() : MutableLiveData<Boolean> {
-        return navStatus
+        _navStatus.value = false
+
     }
     fun skipedSingers() {
-        navStatus.value = true
+        _navStatus.value = true
     }
     fun saveUserSingers(singers : MutableList<QueryDocumentSnapshot>) {
         viewModelScope.launch {
-            navStatus.value = userDao.saveUserSingers(singers)
+            _navStatus.value = userDao.saveUserSingers(singers)
         }
     }
     fun getAllSingers() : MutableLiveData<QuerySnapshot> {

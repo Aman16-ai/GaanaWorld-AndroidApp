@@ -1,6 +1,5 @@
-package com.example.gaanaworld.repository
+package com.example.gaanaworld.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.gaanaworld.data.daos.UserDao
 import com.example.gaanaworld.data.model.User
@@ -8,7 +7,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
-import java.lang.reflect.Executable
 
 class UserAuthenticationRepository {
     private var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -24,10 +22,10 @@ class UserAuthenticationRepository {
             if(result.user != null) {
                 val user = User(uid = mAuth.uid,firstName = firstName,lastName = lastName,email = email)
                 val fireStoreResult :Boolean = userdoa.saveUserDetails(user)
-                userAuthState.value = fireStoreResult
+                userAuthState.postValue(true)
             }
             else {
-                userAuthState.value = false
+                userAuthState.postValue(false)
             }
         }catch (e:Exception) {
             e.printStackTrace()
