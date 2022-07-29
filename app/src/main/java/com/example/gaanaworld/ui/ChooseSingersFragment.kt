@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gaanaworld.R
+import com.example.gaanaworld.data.model.Singers
 import com.example.gaanaworld.ui.adapter.SingersAdapter
 import com.example.gaanaworld.utils.toast
 import com.example.gaanaworld.ui.viewmodels.ChooseSingersViewModel
@@ -53,10 +54,12 @@ class ChooseSingersFragment : Fragment() {
             adapter = singersAdapter
         }
         chooseSingersViewModel.getAllSingers().observe(viewLifecycleOwner) {
-            for(i in it) {
-                Log.d("singers", "onCreateView: "+i.get("name"))
+            it?.let {
+                for(i in it) {
+                    Log.d("singers", "id ${i.toString()} name ${i.name}")
+                }
+                singersAdapter.setSingers(it.toList() as MutableList<Singers>)
             }
-            singersAdapter.setSingers(it.toList() as MutableList<QueryDocumentSnapshot>)
         }
 
 
@@ -68,7 +71,7 @@ class ChooseSingersFragment : Fragment() {
             context?.toast("saving your choices")
             val singers = singersAdapter.getUserSelectedSingers()
             for (i in singers) {
-                Log.d("usersingers", "onCreateView: "+i.get("name"))
+                Log.d("usersingers", "onCreateView: "+i.name)
             }
             chooseSingersViewModel.saveUserSingers(singers)
         }

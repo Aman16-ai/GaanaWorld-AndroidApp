@@ -1,5 +1,6 @@
 package com.example.gaanaworld.data.daos
 
+import com.example.gaanaworld.data.model.Singers
 import com.example.gaanaworld.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,7 +29,7 @@ class UserDao {
         }
     }
 
-    suspend fun saveUserSingers(singers:MutableList<QueryDocumentSnapshot>): Boolean {
+    suspend fun saveUserSingers(singers:MutableList<Singers>): Boolean {
         return try {
             val result = mAuth.uid?.let { db.collection("user").document(it).update("singers",singers).await() }
             return true
