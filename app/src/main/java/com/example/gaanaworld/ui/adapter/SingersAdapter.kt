@@ -1,4 +1,4 @@
-package com.example.gaanaworld.adapter
+package com.example.gaanaworld.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,13 +11,12 @@ import com.bumptech.glide.Glide
 import com.example.gaanaworld.R
 import com.example.gaanaworld.data.model.Singers
 import com.example.gaanaworld.utils.toast
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class SingersAdapter(var context: Context) : RecyclerView.Adapter<SingersAdapter.myViewHolder>() {
-    private var singerslist : MutableList<QueryDocumentSnapshot> = ArrayList()
+    private var singerslist : MutableList<Singers> = ArrayList()
 
-    private var selectedSingersList : MutableList<QueryDocumentSnapshot> = ArrayList()
+    private var selectedSingersList : MutableList<Singers> = ArrayList()
 
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
          var singerImgView : ImageView = itemView.findViewById(R.id.singer_img)
@@ -33,8 +32,8 @@ class SingersAdapter(var context: Context) : RecyclerView.Adapter<SingersAdapter
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         var singer = singerslist[position]
-        Glide.with(context).load(singer.get("profileImgUrl")).into(holder.singerImgView)
-        holder.singerNameTv.text = singer.getString("name")
+        Glide.with(context).load(singer.profileImgUrl).into(holder.singerImgView)
+        holder.singerNameTv.text = singer.name
         holder.itemView.setOnClickListener{
             context.toast("Clicked")
 
@@ -54,7 +53,7 @@ class SingersAdapter(var context: Context) : RecyclerView.Adapter<SingersAdapter
             //selectedSingersList.add(singer)
         }
     }
-    fun setSingers(singers: MutableList<QueryDocumentSnapshot>) {
+    fun setSingers(singers: MutableList<Singers>) {
         singerslist.clear()
         singerslist.addAll(singers)
         notifyDataSetChanged()
@@ -63,7 +62,7 @@ class SingersAdapter(var context: Context) : RecyclerView.Adapter<SingersAdapter
         return singerslist.size
     }
 
-    fun getUserSelectedSingers() : MutableList<QueryDocumentSnapshot> {
+    fun getUserSelectedSingers() : MutableList<Singers> {
         return selectedSingersList
     }
 

@@ -1,10 +1,10 @@
-package com.example.gaanaworld.viewmodels
+package com.example.gaanaworld.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.gaanaworld.repository.UserAuthenticationRepository
+import com.example.gaanaworld.data.repository.UserAuthenticationRepository
 import kotlinx.coroutines.launch
 
 class RegisterUserViewModel(application : Application) : AndroidViewModel(application) {

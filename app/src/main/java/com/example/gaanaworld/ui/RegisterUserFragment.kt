@@ -11,8 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gaanaworld.R
-import com.example.gaanaworld.viewmodels.LoginUserViewModel
-import com.example.gaanaworld.viewmodels.RegisterUserViewModel
+import com.example.gaanaworld.ui.viewmodels.RegisterUserViewModel
 
 
 class RegisterUserFragment : Fragment() {
