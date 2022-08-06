@@ -13,6 +13,7 @@ import com.example.gaanaworld.helper.TaskProgressTracker
 import com.example.gaanaworld.utils.toast
 import com.google.android.exoplayer2.ExoPlayer
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SongsViewModel(application: Application) : AndroidViewModel(application) {
@@ -21,12 +22,17 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
     private var exoPlayerMusic = ExoPlayerMusic(application.applicationContext)
     private val songDao = SongDao()
     private var songslst : MutableLiveData<MutableList<Song>> = MutableLiveData()
-    private var currentPosition : MutableLiveData<Long> = MutableLiveData()
+    private var _currentPosition : MutableLiveData<Long> = MutableLiveData()
+    val currentPosition : LiveData<Long>
+    get () = _currentPosition
     private var _uploadProgressTracker : MutableLiveData<TaskProgressTracker> = MutableLiveData()
 
     val uploadProgressTracker : LiveData<TaskProgressTracker>
     get() = _uploadProgressTracker
 
+    init {
+        getCurrentSongDuration()
+    }
     fun initialized(url:String) {
         exoPlayerMusic.initializedPlayer(url)
     }
@@ -40,12 +46,19 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
         return songslst
     }
 
+    fun seekTo(duration:Long) {
+        exoPlayerMusic.seekToCurrentDuration(duration)
+    }
     fun getSongDuration() : MutableLiveData<Long> {
         return exoPlayerMusic.getMusicDuration()
     }
-    fun getCurrentSongDuration() : MutableLiveData<Long> {
-        currentPosition.value = exoPlayerMusic.getCurrentPlayerPosition()
-        return currentPosition
+    private fun getCurrentSongDuration() {
+        viewModelScope.launch {
+            while (true) {
+                _currentPosition.postValue(exoPlayerMusic.getCurrentPlayerPosition())
+                delay(100L)
+            }
+        }
     }
 
     fun fetchSongs() {

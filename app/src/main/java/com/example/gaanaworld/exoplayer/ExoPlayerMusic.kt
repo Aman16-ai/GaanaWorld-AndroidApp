@@ -15,6 +15,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.Util
+import java.time.Duration
 import kotlin.properties.Delegates
 
 class ExoPlayerMusic(val context:Context) {
@@ -42,7 +43,6 @@ class ExoPlayerMusic(val context:Context) {
 
             }
         })
-
     }
 
     public fun playPauseMusic() {
@@ -57,6 +57,9 @@ class ExoPlayerMusic(val context:Context) {
         return songDuration
     }
 
+    fun seekToCurrentDuration(duration: Long) {
+        exoPlayer.seekTo(duration)
+    }
     public fun getCurrentPlayerPosition() : Long {
         return exoPlayer.currentPosition
     }
