@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.MusicScreenFragment">
+    tools:context=".ui.MusicScreenFragment"
+    android:background="#000814"
+    android:padding="10dp"
+    >
 
     <ImageView
         android:id="@+id/current_song_thumbnail"
@@ -25,10 +28,10 @@
         app:layout_constraintTop_toBottomOf="@id/current_song_thumbnail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
         android:text="Ilzaam"
         android:textSize="25dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/cabinbold"
@@ -42,7 +45,8 @@
         app:layout_constraintRight_toRightOf="@id/song_name_tv"
         android:text="Arjun Kanungo,King"
         android:layout_marginTop="5dp"
-        android:textSize="18dp"
+        android:textSize="15dp"
+        android:textColor="@color/white"
         android:fontFamily="@font/cabinbold"
 
         />
@@ -50,18 +54,26 @@
         android:id="@+id/song_seekbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/song_singer_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/song_singer_name_tv"
         app:layout_constraintLeft_toLeftOf="@+id/song_singer_name_tv"
         app:layout_constraintRight_toRightOf="@id/song_singer_name_tv"
         android:layout_marginTop="25dp"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/white"
+        android:scaleY="1"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
         />
+
+
     <TextView
         android:id="@+id/song_duration_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/song_seekbar"
+        app:layout_constraintTop_toBottomOf="@id/song_seekbar"
         app:layout_constraintRight_toRightOf="@id/song_seekbar"
         android:layout_marginTop="5dp"
+        android:textColor="@color/white"
         android:text="4:56"
 
         />
@@ -70,23 +82,23 @@
         android:id="@+id/song_current_duration_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/song_seekbar"
-        app:layout_constraintLeft_toLeftOf="@+id/song_seekbar"
+        app:layout_constraintTop_toBottomOf="@id/song_seekbar"
+        app:layout_constraintLeft_toLeftOf="@id/song_seekbar"
         android:layout_marginTop="5dp"
+        android:textColor="@color/white"
         android:text="0:00"
 
         />
-    <com.google.android.material.button.MaterialButton
+    <ImageButton
         android:id="@+id/play_pause_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         android:text="play"
-        android:backgroundTint="@color/black"
-        app:cornerRadius="20dp"
+       android:background="@drawable/ic_baseline_play_circle_filled_24"
         />
 
 <!--    <com.google.android.exoplayer2.ui.PlayerView-->
